@@ -29,17 +29,19 @@
 	
 	$base_file_name = $_SERVER["DOCUMENT_ROOT"].'/'.$DP_Config->backend_dir.'/content/shop/data_transfer/database_transfer/import_classes/base.php';
 	require_once($base_file_name);
+    $f = fopen('log.txt', 'w');
+
 	$db_link->beginTransaction();
 	try 
 	{	
 		foreach ($xml as $key => $table)
 		{
+
 			$file_name = $_SERVER["DOCUMENT_ROOT"].'/'.$DP_Config->backend_dir.'/content/shop/data_transfer/database_transfer/import_classes/'.$key.'.php';
-			//echo $file_name;
 			if (file_exists($file_name))
 			{
 				require_once($file_name);
-				$obj = new $key($table, $dictionary[$key]);
+				$obj = new $key($table, $dictionary[$key], $f);
 				$obj->putDataIntoTable();
 				$obj->destroy();
 			}
@@ -48,16 +50,16 @@
 	catch (PDOException $e)
 	{
 		$db_link->rollBack();
-		echo "<br>".$e->getMessage();
+		fwrite($f, "<br>".$e->getMessage());
 		exit();
 	}
 	catch (Exception $e)
 	{
 		$db_link->rollBack();
-		echo "<br>".$e->getMessage();
+        fwrite($f, "<br>".$e->getMessage());
 		exit();
 	}
 	$db_link->commit();
-	echo "<br>Успешно";
+    fwrite($f, "<br>Успешно");
 
 ?>

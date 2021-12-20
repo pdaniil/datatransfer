@@ -37,6 +37,7 @@
 
         writeLog("Лог процесса:", $f);
 
+        //Работа с файлом config
 		if ($xml->db_version == '1.0') //Новая версия платформы, просто идём по файлу и загружаем данные
 		{
             writeLog("Версия ИБ:", $f, $xml->db_version);
@@ -56,7 +57,7 @@
 				{
 					continue;
 				}
-				
+
 				if($item["type"]=="password")//Для паролей: если передан пустой - оставляем как есть
 				{
 					if($xml->config->{$item["name"]} != "") DP_ConfigEditor::setParameter($item["name"], $xml->config->{$item["name"]});
@@ -70,62 +71,68 @@
 					DP_ConfigEditor::setParameter($item["name"], $xml->config->{$item["name"]});
 				}
 			}
-			
+
 			//Конец работы с файлом config
 			writeLog("Конец работы с файлом config.", $f);
 
-			//Начало работы с БД
-			//Все изменения делаем через транзакции
-            writeLog("Начало работы с бд.", $f);
-            try
+		}
+
+
+        //Начало работы с БД
+        $dictionary_folder = $_SERVER["DOCUMENT_ROOT"].'/'.$DP_Config->backend_dir.'/content/shop/data_transfer/database_transfer/dictionary/'.
+            $xml->db_version.'.php';
+
+        if (file_exists($dictionary_folder))
+            echo "Словарь версии ".$xml->db_version." был успешно подключен.";
+
+        require_once($dictionary_folder);
+
+
+        $base_file_name = $_SERVER["DOCUMENT_ROOT"].'/'.$DP_Config->backend_dir.'/content/shop/data_transfer/database_transfer/import_classes/base.php';
+        require_once($base_file_name);
+        $db_link->beginTransaction();
+        try
+        {
+            foreach ($xml as $key => $table)
             {
-                $db_link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $db_link->beginTransaction();
 
-                writeLog("sms_api start", $f);
-
-                $SQL_select = "SELECT `id` FROM `sms_api` WHERE `active` = 1;";
-                $query = $db_link->prepare($SQL_select);
-                if (!$query->execute())
+                $file_name = $_SERVER["DOCUMENT_ROOT"].'/'.$DP_Config->backend_dir.'/content/shop/data_transfer/database_transfer/import_classes/'.$key.'.php';
+                if (file_exists($file_name))
                 {
-                    throw new PDOException("Ошибка при чтении таблицы sms_api");
+                    require_once($file_name);
+                    $obj = new $key($table, $dictionary[$key], $f);
+                    $obj->putDataIntoTable();
+                    $obj->destroy();
                 }
-                $result = $query->fetch();
-
-                if (!is_null($result["id"]))
-                {
-                    $SQL_update = "UPDATE `sms_api` SET `active` = 0 WHERE `id` = ?;";
-                    $query = $db_link->prepare($SQL_update);
-
-                    if (!$query->execute( array($result["id"]) ))
-                    {
-                        throw new PDOException("Ошибка при изменении активного handler.");
-                    }
-
-                }
-
-                $SQL_update = "UPDATE `sms_api` SET `parameter_values` = ?, `active` = 1 WHERE `handler` = ?;";
-
-                $query = $db_link->prepare($SQL_update);
-
-                if (!$query->execute( array( $xml-> ) ))
-
-                writeLog("sms_api success end");
-
-
-                $db_link->commit();
             }
-            catch (PDOException $e)
-            {
-                $db_link->rollBack();
-                $awnser =
+        }
+        catch (PDOException $e)
+        {
+            $db_link->rollBack();
+            fwrite($f, "<br>".$e->getMessage());
+            $awnser =
                 [
                     "status" => 501,
                     "response" => $e->getMessage()
                 ];
-                exit(json_encode($awnser, true));
-            }
-		}
+            exit(json_encode($awnser, true));
+        }
+        catch (Exception $e)
+        {
+            $db_link->rollBack();
+            fwrite($f, "<br>".$e->getMessage());
+            $awnser =
+                [
+                    "status" => 501,
+                    "response" => $e->getMessage()
+                ];
+            exit(json_encode($awnser, true));
+
+        }
+        $db_link->commit();
+        fwrite($f, "<br>Успешно");
+
+
 		unlink($name);
 
         $awnser = [

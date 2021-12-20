@@ -49,29 +49,17 @@ $DP_Config = new DP_Config;
 		function listener ()
 		{
 			let filename = 'db.xml';
-			function resetProgress(e) {
-                let contentLength = 0;
-                if (e.lengthComputable) {
-                    contentLength = e.total;
-                } else {
-                    contentLength = e.explicitOriginalTarget.;
-                    console.log(contentLength);
-                }
-                console.log(e);
-                document.querySelector('#barProgress').style.width =Math.round(e.loaded / contentLength) +'%';
-                document.querySelector('#barProgress').innerHTML = Math.round(e.loaded / contentLength) +'%';
-			}
+
 			let request = new XMLHttpRequest();
 			let flag = false;
 			request.open("GET", "/<?php echo $DP_Config->backend_dir; ?>/content/shop/data_transfer/database_transfer/ajax_export/create_xml.php?filename="+filename);
 			request.send();
-			request.onprogress = resetProgress;
 			request.onload = function ()
 			{
 				document.querySelector('#barProgressBtn').classList.add('disabled');
 				document.querySelector('#barProgressBtn').removeEventListener('click', listener);
 				window.location = '<?php echo "http://".$_SERVER["SERVER_NAME"]."/".$DP_Config->backend_dir;?>/content/shop/data_transfer/database_transfer/ajax_export/download.php?file='+filename;
-				
+
 			}
 		}
 		document.querySelector('#barProgressBtn').addEventListener('click', listener);
