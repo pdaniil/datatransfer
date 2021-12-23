@@ -1,0 +1,12 @@
+ $this->sendLog("Вложенная структура.");
+
+$this->sendLog("Данные из словаря");
+$this->sendLog($param, 1);
+$this->sendLog("Данные из XML");
+$this->sendLog($value->{$key},1);
+
+
+
+
+$this->sendLog("Словарь данных родителя: ");
+$this->sendLog($sub_param, 1);

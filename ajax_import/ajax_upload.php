@@ -1,4 +1,5 @@
 <?php
+    error_reporting(E_ALL & ~E_NOTICE);
     function writeLog($message, $f, $tmp = null)
     {
         ob_start();
@@ -83,7 +84,7 @@
             $xml->db_version.'.php';
 
         if (file_exists($dictionary_folder))
-            echo "Словарь версии ".$xml->db_version." был успешно подключен.";
+        writeLog("Словарь версии ".$xml->db_version." был успешно подключен.", $f);
 
         require_once($dictionary_folder);
 

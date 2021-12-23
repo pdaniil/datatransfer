@@ -36,7 +36,7 @@ if (!empty($_FILES) ) //Если есть файлы на загрузку
 				</div>
 				<div class="panel-body">
 					<h4>Не перезагружайте страницу, пока идёт иморт базы данных.</h4>
-					<div id="log_place" style="overflow-y: scroll; overflow-x: hidden; max-height: 250px;">
+					<div id="log_place" style="overflow-y: scroll; overflow-x: hidden; max-height: 400px;">
 
 					</div>
 				</div>
@@ -88,8 +88,13 @@ if (!empty($_FILES) ) //Если есть файлы на загрузку
                 if (awnser.status == 200)
                 {
                     alert('Импорт успешно выполнен.');
-                    flag_log = false;
                 }
+                else
+                {
+                    alert('Ошибка. Смотрите логи.');
+                }
+                flag_log = false;
+
             };
             request.send();
 		</script>

@@ -20,26 +20,28 @@
 	$dictionary["offices"] =
 	[
 		"params" => [
-                'id', 'caption', 'country', 'region', 'city', 'address', 'phone', 'email', 'coordinates', 'description', 'users', 'timetable', 'pay_system_id', 'pay_system_parameters', 'arr_geo_id',
-                'geo' => []
+                'id', 'caption', 'country', 'region', 'city', 'address', 'phone', 'email', 'coordinates', 'description', 'users', 'timetable', 'pay_system_id', 'pay_system_parameters',
+                 "geo" => [
+                     "params" => [ "geo_id" ],
+                     "parent_params" => [ "id" ]
+                 ],
+                "storages" =>[
+                    "params" => [ "storage_id", "additional_time",
+                        "groups" =>[
+                            "params" => [ "group_id", "markups" =>
+                                                        [
+                                                            "params" => [ "min_point", "max_point", "markup" ],
+                                                            "parent_params" => [ "storage_id", "additional_time", "id", "group_id" ]
+                                                        ],
+                            ],
+                            "parent_params" => [ "storage_id", "additional_time",  "id"],
+                        ],
+                    ],
+                    "parent_params" => [ "id" ],
+                ],
             ],
-
 	];
 
 
-    $default_update = true;
-
-    $dictionary = [
-        "offices" => [
-            "update" => $default_update,
-            "params" => [
-                "geo" => [
-                    "params" => [],
-                    "sub_params" => ["id"],
-                ]
-            ]
-        ],
-        "sms" => []
-    ];
 
 ?>

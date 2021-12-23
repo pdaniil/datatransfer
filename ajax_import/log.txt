@@ -1,1 +1,256 @@
-<br>Лог процесса:<br>Версия ИБ:1.0<br>Начало работы с файлом config.<br>Конец работы с файлом config.<br>Обновление данных объекта notifications_settings завершено.<br><br>Очистка объекта shop_geo завершена.<br><br>Вставка данных в объект shop_geo завершена.<br><br>Успешно
+<br>Лог процесса:<br>Версия ИБ:1.0<br>Начало работы с файлом config.<br>Конец работы с файлом config.<br>Словарь версии 1.0 был успешно подключен.<br>UPDATE `notifications_settings` SET `email_subject` = ?, `email_body` = ?, `sms_body` = ?, `email_on` = ?, `sms_on` = ? WHERE `name` = ?;<br><br>Вставка данных в объект notifications_settings завершена.<br><br>Очистка объекта shop_geo завершена.<br><br>INSERT INTO `shop_geo`(`id`, `count`, `level`, `value`, `parent`, `order`) VALUES (?,?,?,?,?,?);<br><br>Вставка данных в объект shop_geo завершена.<br><br>Очистка объекта offices завершена.<br><br>INSERT INTO `shop_offices`(`id`, `caption`, `country`, `region`, `city`, `address`, `phone`, `email`, `coordinates`, `description`, `users`, `timetable`, `pay_system_id`, `pay_system_parameters`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)<br><br>Очистка объекта offices_geo завершена.<br><br>INSERT INTO `shop_offices_geo_map`(`geo_id`, `office_id`) VALUES (?, ?);<br><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 1000
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 2
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 3
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><br>Вставка данных в объект offices_geo завершена.<br><br>Очистка объекта offices_storages завершена.<br><br>INSERT INTO `shop_offices_storages_map`( `storage_id`,  `additional_time`,`office_id`) VALUES (?,?,?)<br><br>UPDATE `shop_offices_storages_map` SET `group_id` = ? WHERE `storage_id` = ? AND `office_id` = ?<br><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 2
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 3
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><br>Вставка данных в объект offices_storages_groups завершена.<br><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 0
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><br>UPDATE `shop_offices_storages_map` SET `group_id` = ? WHERE `storage_id` = ? AND `office_id` = ?<br><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 2
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 2
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 2
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 3
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 2
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><br>Вставка данных в объект offices_storages_groups завершена.<br><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 2
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 0
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><br>UPDATE `shop_offices_storages_map` SET `group_id` = ? WHERE `storage_id` = ? AND `office_id` = ?<br><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 3
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 2
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 3
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 3
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 3
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><br>Вставка данных в объект offices_storages_groups завершена.<br><pre>Array
+(
+    [0] => SimpleXMLElement Object
+        (
+            [0] => 3
+        )
+
+    [1] => SimpleXMLElement Object
+        (
+            [0] => 0
+        )
+
+    [2] => SimpleXMLElement Object
+        (
+            [0] => 1
+        )
+
+)
+</pre><br>Вставка данных в объект offices_storages завершена.<br><br>Вставка данных в объект offices завершена.<br><br>Успешно
